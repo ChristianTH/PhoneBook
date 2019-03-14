@@ -1,32 +1,57 @@
 package com.acn.utils;
 
-import java.util.Map;
+import java.util.Scanner;
 
-import com.acn.bo.Contact;
+import com.acn.bo.PhoneBook;
 
 public class SearchContactInfo {
 
-	Map<String, Contact> localContacts;
-	
+	private static final String ADD = "add ";
+	private static final String DELETE = "delete ";
+	private static final String CLOSE_APP = "closeapp";
+	private static final String BYE = "bye";
+
 	public static void main(String[] args) {
+
+		Scanner scanner = new Scanner(System.in);
+		String input;
 		
-		// TODO: initialize map
+		System.out.println("Welcome in PhoneBook.");
+		while (true) {
+			System.out.println("");
+			System.out.print("Name: ");
+			input = scanner.nextLine();
+
+			if (input.equals(CLOSE_APP)) {
+				System.out.println(BYE);
+				break;
+			}
+
+			PhoneBook phoneBook = PhoneBook.getInstance();
+
+			if (input.startsWith(DELETE)) {
+				input = input.substring(DELETE.length());
+				phoneBook.deleteContact(input);
+				continue;
+			}
+
+			if (input.startsWith(ADD)) {
+				input = input.substring(ADD.length());
+				String[] splittedInput = input.split(" ");
+				phoneBook.addContact(splittedInput[0], splittedInput[1], splittedInput[2]);
+				continue;
+			}
+
+			if (phoneBook.contactExists(input)) {
+				System.out.println(phoneBook.getAddress(input));
+				System.out.println(PhoneBook.getInstance().getPhoneNumber(input));
+			} else {
+				System.out.println(PhoneBook.NOT_FOUND);
+			}
+		}
 		
-		// TODO: start application in console with "Name: " and then wait for user input
+		scanner.close();
 		
-		// TODO: after input set with enter:
-		// 1. if contact does not exist, printout "Contact with name: <input> does not exist." 
-		
-		// 2. search address 
-		// if found: printout the address of the contact
-		// else: printout "No address saved for <input>"
-		
-		// 3. search phone number
-		// if found: printout the phone number of the contact
-		// else: printout "No phone number saved for <input>"
-		
-		// 4. printout "Name: " and wait for another input
-		
-		// TODO: end application in console with input "closeapp"
 	}
+
 }

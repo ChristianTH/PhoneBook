@@ -2,24 +2,21 @@ package com.acn.bo;
 
 public class Contact {
 
-	private String name;
-	private String address;
+	private Person person;
 	private String phonenumber;
 
-	public String getName() {
-		return name;
+	public Contact(Person person, String phonenumber) {
+		super();
+		this.person = person;
+		this.phonenumber = phonenumber;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public Person getPerson() {
+		return person;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 
 	public String getPhonenumber() {
