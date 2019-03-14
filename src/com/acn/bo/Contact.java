@@ -1,4 +1,4 @@
-package acn.bo;
+package com.acn.bo;
 
 public class Contact {
 
